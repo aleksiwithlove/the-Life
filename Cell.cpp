@@ -1,29 +1,22 @@
 #include <iostream>
 #include "Cell.h"
 
-
+//создаем мертвую клетку
 Cell::Cell()
 {
-	alive = 1;
-	cell_neighbors = NULL;
+	alive = 0;
 }
 
-
-Cell::Cell(bool* obj)
+//функция оживления или умертвления клетки
+Cell& Cell::cell_alive()
 {
-	cell_neighbors = new bool[8];
-	cell_neighbors = obj;
-	alive = 1;	
-}
-
-bool Cell::func_alive(){ return alive; }
-bool Cell::cell_death()
-{ 
-	alive = 0; 
-	return alive;
-}
-bool Cell::cell_alive()
-{
-	alive = 1;
-	return alive;
+	//проверяем сумму живых соседей
+	int sum = 0;
+	for (int i = 0; i < cell_neighbors.size(); i++)
+	{
+		sum += cell_neighbors[i]->alive;
+	}
+	if (sum == 3 && sum == 2) alive = 1;
+	else alive = 0;
+	return *this;
 }
