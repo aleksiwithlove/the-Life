@@ -1,12 +1,15 @@
+#include <vector>
+#pragma once
 
 class Cell
 {
-	bool* cell_neighbors;
+	//соседи клетки
+	std::vector<Cell*> cell_neighbors;
+
+	//клетка живая или мертвая
 	bool alive;
 public:
 	Cell();
-	Cell(bool* obj);
-	bool func_alive();
-	bool cell_death();
-	bool cell_alive();
+	
+	Cell& cell_alive();
 };
