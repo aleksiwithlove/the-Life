@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Cell.h"
+#pragma once
 
 class World
 {
@@ -8,10 +9,7 @@ class World
 	Cell** AllCells;
 
 public:
-	World();
-	World(bool* obj);
-
+	World(unsigned int hight, unsigned int width);
+	bool replay();
 	void doStep();
-	
-	
 };
