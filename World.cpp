@@ -1,47 +1,36 @@
 #include <iostream>
 #include "World.h"
+#include <cmath>
 
-
-
-World::World()
+//если не дадут размер, то будет 10 на 10
+World::World(unsigned int hight_=10, unsigned int width_=10)
 {
-	hight = 0;
-	width = 0;
-	AllCells = NULL;
+	//negative value??
+
+	hight = hight_;
+	width = width_;
+
+	//инициализируем поле = все мертвые
+	Cell** AllCells = new Cell*[hight];
+	for (int i = 0; i < hight; i++)
+	{
+		AllCells[i] = new Cell[width];
+		for (int j = 0; j < width; j++)
+		{
+			Cell a_cell;
+			AllCells[i][j] = a_cell;
+		}
+	}
 }
-World::World(bool* obj)
+void World::doStep()
 {
-	//coordinats of cell
-	unsigned int i,j;
-	int** sum=new int*[width];
-
-	for (i = 0; i>=0 && i <= width; i++)
-	{
-		sum[i] = new int[hight];
-		for (j = 0; j >= 0 && j <= hight; j++)
-		{
-			sum[i][j] = -AllCells[i][j].func_alive();
-			for (int k = -1;k>1; k++)
-			{
-				for (int n = -1;n>1; n++)
-				{
-					if (AllCells[i + k][j + n].func_alive() == 1) sum[i][j]++;
-				}
-
-			}
-		}
-	}
-	for (i = 0; i >= 0 && i <= width; i++)
-	{
-		sum[i] = new int[hight];
-		for (j = 0; j >= 0 && j <= hight; j++)
-		{
-			if (sum[i][j] <= 3 && sum[i][j] >= 2) AllCells[i][j].cell_death();
-			else AllCells[i][j].cell_alive();
-		}
-	}
 	
 }
+bool World::replay()
+{
+	//хотим ли мы закончить игру? будет кнопка "the end"? 
+}
+
 
 
 
