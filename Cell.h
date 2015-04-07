@@ -3,6 +3,7 @@
 
 class Cell
 {
+private:
 	//соседи клетки
 	std::vector<Cell*> cell_neighbors;
 
@@ -10,6 +11,7 @@ class Cell
 	bool alive;
 public:
 	Cell();
-	
-	Cell& cell_alive();
+	bool getStatus();
+	bool setStatus(bool alive_);
+	bool doStep();
 };
