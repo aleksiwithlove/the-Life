@@ -4,11 +4,11 @@
 //создаем мертвую клетку
 Cell::Cell()
 {
-	alive = 0;
+	alive = true;
 }
 
 //функция оживления или умертвления клетки
-Cell& Cell::cell_alive()
+bool Cell::doStep()
 {
 	//проверяем сумму живых соседей
 	int sum = 0;
@@ -16,7 +16,15 @@ Cell& Cell::cell_alive()
 	{
 		sum += cell_neighbors[i]->alive;
 	}
-	if (sum == 3 && sum == 2) alive = 1;
-	else alive = 0;
-	return *this;
+	if (sum == 3 || sum == 2) alive = true;
+	else alive = false;
+	return alive;
 }
+
+bool Cell::getStatus() { return alive; }
+bool Cell::setStatus(bool alive_)
+{
+	alive = alive_;
+	return alive;
+}
+
