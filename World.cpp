@@ -17,7 +17,7 @@ World::World(unsigned int hight_=10, unsigned int width_=10)
 		AllCells[i] = new Cell[width];
 		for (int j = 0; j < width; j++)
 		{
-			Cell a_cell; //add a memory!!!
+			Cell a_cell; 
 			AllCells[i][j] = a_cell;
 		}
 	}
@@ -30,7 +30,13 @@ World::~World()
 }
 void World::doStep()
 {
-	
+	for (int i = 0; i < hight; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			AllCells[i][j].doStep();
+		}
+	}
 }
 
 Cell World::setStatusofCell(int x, int y, bool alive)
