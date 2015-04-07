@@ -17,18 +17,37 @@ World::World(unsigned int hight_=10, unsigned int width_=10)
 		AllCells[i] = new Cell[width];
 		for (int j = 0; j < width; j++)
 		{
-			Cell a_cell;
+			Cell a_cell; //add a memory!!!
 			AllCells[i][j] = a_cell;
 		}
 	}
+}
+World::~World()
+{
+	hight = 0;
+	width = 0;
+	AllCells = NULL;
 }
 void World::doStep()
 {
 	
 }
+
+Cell World::setStatusofCell(int x, int y, bool alive)
+{
+	AllCells[x][y].setStatus(alive); 
+	return AllCells[x][y];
+}
+
+bool World::getStatusofCell(int x, int y)
+{
+	return AllCells[x][y].getStatus();
+}
+
 bool World::replay()
 {
-	//хотим ли мы закончить игру? будет кнопка "the end"? 
+	return 0;
+	//хотим ли мы закончить игру? будет кнопка "конец"? 
 }
 
 
