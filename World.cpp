@@ -1,36 +1,65 @@
 #include <iostream>
+#include <vector>
 #include "World.h"
 #include <cmath>
 
-//если не дадут размер, то будет 10 на 10
-World::World(unsigned int hight_=10, unsigned int width_=10)
+//create new world
+//if there are not input parametrs create the world with the size of 10*10 cells
+World::World(unsigned int height=10, unsigned int width=10)
 {
-	//negative value??
+	//define parametrs
+	this->height = height;
+	this->width = width;
 
-	hight = hight_;
-	width = width_;
 
-	//инициализируем поле = все мертвые
-	Cell** AllCells = new Cell*[hight];
-	for (int i = 0; i < hight; i++)
+	//give the memory to the cells
+	Cell** AllCells = new Cell*[height];
+	for (int i = 0; i < height; i++)
 	{
 		AllCells[i] = new Cell[width];
 		for (int j = 0; j < width; j++)
 		{
-			Cell a_cell; 
-			AllCells[i][j] = a_cell;
+			//initialize cells
+			int num = i%2;
+			if (num == 0) AllCells[i][j].setStatus(true);
+			else AllCells[i][j].setStatus(false);
+		}
+	}
+
+	//so, let's find our neighbors
+	std::vector <Cell*> cell_neigh;
+	int n_neigh=0;
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			for (int k = -1; k <= 1; k++)
+			{
+				for (int g = -1; g <= 1; g++)
+				{
+					for (int n_neigh; n_neigh < 8; n_neigh++)
+					{
+						//meet with the neighbors
+						if (k != 0 && g != 0) { cell_neigh[n_neigh] = AllCells[i + k][j + g].who_are_you(); }
+					}
+				}
+			}
 		}
 	}
 }
+
+
+
+
 World::~World()
 {
-	hight = 0;
+	height = 0;
 	width = 0;
-	AllCells = NULL;
+	delete[]AllCells;
 }
 void World::doStep()
 {
-	for (int i = 0; i < hight; i++)
+	for (int i = 0; i < height; i++)
 	{
 		for (int j = 0; j < width; j++)
 		{
