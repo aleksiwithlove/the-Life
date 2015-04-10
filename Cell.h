@@ -12,6 +12,7 @@ private:
 public:
 	Cell();
 	bool getStatus();
-	bool setStatus(bool alive_);
+	void setStatus(bool alive);
 	bool doStep();
+	Cell* who_are_you();
 };
