@@ -1,19 +1,21 @@
-#include <iostream>
 #include "Cell.h"
+#include <vector>
+
 #pragma once
 
 class World
 {
 private:
-	unsigned int hight; //only positive
+	unsigned int height; //only positive
 	unsigned int width;
 	Cell** AllCells;
 
 public:
-	World(unsigned int hight, unsigned int width);
+	World(unsigned int haight, unsigned int width);
 	~World();
 	bool replay();
 	void doStep();
+	//std::vector<Cell*> add_a_heighbors(Cell obj);
 	Cell setStatusofCell(int x, int y, bool alive);
 	bool getStatusofCell(int x, int y);
 };
