@@ -13,9 +13,9 @@ private:
 public:
 	World(unsigned int haight, unsigned int width);
 	~World();
-	bool replay();
 	void doStep();
 	//std::vector<Cell*> add_a_heighbors(Cell obj);
 	Cell setStatusofCell(int x, int y, bool alive);
 	bool getStatusofCell(int x, int y);
+	void reset();
 };
