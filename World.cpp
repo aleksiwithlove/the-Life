@@ -77,13 +77,15 @@ World::World(unsigned int height=10, unsigned int width=10)
 
 
 
-
+//deconstructor of the world
 World::~World()
 {
 	height = 0;
 	width = 0;
 	delete[]AllCells;
 }
+
+//function of the next generation
 void World::doStep()
 {
 	for (int i = 0; i < height; i++)
@@ -95,22 +97,32 @@ void World::doStep()
 	}
 }
 
+
 Cell World::setStatusofCell(int x, int y, bool alive)
 {
 	AllCells[x][y].setStatus(alive); 
 	return AllCells[x][y];
 }
 
+
 bool World::getStatusofCell(int x, int y)
 {
 	return AllCells[x][y].getStatus();
 }
 
-bool World::replay()
+//reset the world
+void World::reset()
 {
-	return 0;
-	//хотим ли мы закончить игру? будет кнопка "конец"? 
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			AllCells[i][j].setStatus(false);
+		}
+	}
 }
+
+
 
 
 
