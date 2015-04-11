@@ -37,10 +37,37 @@ World::World(unsigned int height=10, unsigned int width=10)
 			{
 				for (int g = -1; g <= 1; g++)
 				{
-					for (int n_neigh; n_neigh < 8; n_neigh++)
+					if (i != 0 && j != 0 && i != height && j != width)
 					{
-						//meet with the neighbors
-						if (k != 0 && g != 0) { cell_neigh[n_neigh] = AllCells[i + k][j + g].who_are_you(); }
+						for (int n_neigh; n_neigh < 8; n_neigh++)
+						{
+							//meet with the neighbors
+							if (k != 0 && g != 0) { cell_neigh[n_neigh] = AllCells[i + k][j + g].who_are_you(); }
+						}
+					}
+					if (i == 1 || i == (height-1))
+					{
+						for (int n_neigh; n_neigh < 5; n_neigh++)
+						{
+							//meet with the neighbors
+							if (k != 0 && g != 0) { cell_neigh[n_neigh] = AllCells[i + k][j + g].who_are_you(); }
+						}
+					}
+					if (j == 1 || j == (width - 1))
+					{
+						for (int n_neigh; n_neigh < 5; n_neigh++)
+						{
+							//meet with the neighbors
+							if (k != 0 && g != 0) { cell_neigh[n_neigh] = AllCells[i + k][j + g].who_are_you(); }
+						}
+					}
+					else
+					{
+						for (int n_neigh; n_neigh < 3; n_neigh++)
+						{
+							//meet with the neighbors
+							if (k != 0 && g != 0) { cell_neigh[n_neigh] = AllCells[i + k][j + g].who_are_you(); }
+						}
 					}
 				}
 			}
