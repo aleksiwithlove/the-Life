@@ -1,19 +1,15 @@
-#include "Cell.h"
-#include <vector>
+#include "mainwindow.h"
+#include <QApplication>
+#include "World.h"
 
-#pragma once
-
-class World
+int main(int argc, char *argv[])
 {
-public:
-    unsigned int height; //only positive
-    unsigned int width;
-    std::vector<std::vector<Cell>> AllCells;
-    World(unsigned int height, unsigned int width);
-	~World();
-	void doStep();
-    Cell setStatusOfCell(int x, int y, bool alive);
-    bool getStatusOfCell(int x, int y);
-	void reset();
-};
+    QApplication a(argc, argv);
+    World world(20, 20);
 
+    MainWindow w;
+    w.setWorld(&world);
+    w.show();
+
+    return a.exec();
+}
