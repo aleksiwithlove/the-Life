@@ -11,13 +11,13 @@ Cell::Cell()
 
 //function of the step to the future, 
 //define what will be the status of cell in the future
+
+
 bool Cell::doStep()
 {
-	//calculate the sum of the neighbors
 	int sum = 0;
 	for (int i = 0; i < cell_neighbors.size(); i++)
 	{
-		//if the cell is alive "plus one" to the sum
 		sum += cell_neighbors[i]->alive;
 	}
 
@@ -34,8 +34,13 @@ bool Cell::doStep()
 
 
 //recognize the cell's status
-bool Cell::getStatus() { return alive; }
-Cell* Cell::who_are_you() { return this; }
+bool Cell::getStatus() {
+    return alive;
+    }
+void Cell::addNeighbour(Cell* n)
+{
+    cell_neighbors.push_back(n);
+}
 
 //give to the cell a certain status
 void Cell::setStatus(bool alive)
