@@ -3,33 +3,27 @@
 #include "World.h"
 #include <cmath>
 
-//create new world
-//if there are not input parametrs create the world with the size of 10*10 cells
-World::World(unsigned int height=10, unsigned int width=10)
+World::World(unsigned int height=20, unsigned int width=20)
 {
-	//define parametrs
-	this->height = height;
+    this->height = height;
 	this->width = width;
 
-
-	//give the memory to the cells
-	Cell** AllCells = new Cell*[height];
+    AllCells.resize(height);
+    //Cell** AllCells = new Cell*[height];
 	for (int i = 0; i < height; i++)
 	{
-		AllCells[i] = new Cell[width];
+        AllCells[i].resize(width);
 		for (int j = 0; j < width; j++)
 		{
-			//initialize cells
-			int num = i%2;
-			if (num == 0) AllCells[i][j].setStatus(true);
-			else AllCells[i][j].setStatus(false);
+            Cell Ameba;
+            Ameba.setStatus(false);
+            AllCells[i][j] = Ameba;
+
 		}
 	}
 
 	//so, let's find our neighbors
-	std::vector <Cell*> cell_neigh;
-	int n_neigh=0;
-	for (int i = 0; i < height; i++)
+    for (int i = 0; i < height; i++)
 	{
 		for (int j = 0; j < width; j++)
 		{
@@ -39,34 +33,10 @@ World::World(unsigned int height=10, unsigned int width=10)
 				{
 					if (i != 0 && j != 0 && i != height && j != width)
 					{
-						for (int n_neigh; n_neigh < 8; n_neigh++)
-						{
-							//meet with the neighbors
-							if (k != 0 && g != 0) { cell_neigh[n_neigh] = AllCells[i + k][j + g].who_are_you(); }
-						}
-					}
-					if (i == 1 || i == (height-1))
-					{
-						for (int n_neigh; n_neigh < 5; n_neigh++)
-						{
-							//meet with the neighbors
-							if (k != 0 && g != 0) { cell_neigh[n_neigh] = AllCells[i + k][j + g].who_are_you(); }
-						}
-					}
-					if (j == 1 || j == (width - 1))
-					{
-						for (int n_neigh; n_neigh < 5; n_neigh++)
-						{
-							//meet with the neighbors
-							if (k != 0 && g != 0) { cell_neigh[n_neigh] = AllCells[i + k][j + g].who_are_you(); }
-						}
-					}
-					else
-					{
-						for (int n_neigh; n_neigh < 3; n_neigh++)
-						{
-							//meet with the neighbors
-							if (k != 0 && g != 0) { cell_neigh[n_neigh] = AllCells[i + k][j + g].who_are_you(); }
+                            {
+                          if (k != 0 && g != 0) {
+                              AllCells[i][j].addNeighbour(&(AllCells[(i+k)%height][(j+g)%width]));
+                          }
 						}
 					}
 				}
@@ -80,9 +50,7 @@ World::World(unsigned int height=10, unsigned int width=10)
 //deconstructor of the world
 World::~World()
 {
-	height = 0;
-	width = 0;
-	delete[]AllCells;
+    AllCells.clear();
 }
 
 //function of the next generation
@@ -98,16 +66,16 @@ void World::doStep()
 }
 
 
-Cell World::setStatusofCell(int x, int y, bool alive)
+Cell World::setStatusOfCell(int x, int y, bool alive)
 {
-	AllCells[x][y].setStatus(alive); 
+    AllCells[x][y].setStatus(alive);
 	return AllCells[x][y];
 }
 
 
-bool World::getStatusofCell(int x, int y)
+bool World::getStatusOfCell(int x, int y)
 {
-	return AllCells[x][y].getStatus();
+    return AllCells[x][y].getStatus();
 }
 
 //reset the world
