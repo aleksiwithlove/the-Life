@@ -1,21 +1,19 @@
-#include <iostream>
-#include "World.h"
 #include "Cell.h"
+#include <vector>
 
+#pragma once
 
-int main()
+class World
 {
-	int hight, width;
-	std::cin >>hight;
-	std::cin >> width;
-	//создаем мир
-	World MyWorld(hight, width);
+public:
+    unsigned int height; //only positive
+    unsigned int width;
+    std::vector<std::vector<Cell>> AllCells;
+    World(unsigned int height, unsigned int width);
+	~World();
+	void doStep();
+    Cell setStatusOfCell(int x, int y, bool alive);
+    bool getStatusOfCell(int x, int y);
+	void reset();
+};
 
-	//как мы зададим живые клетки? мышью хотели. тогда уже нужно Qt юзать? 
-	while (MyWorld.replay())
-	{
-		MyWorld.doStep();
-	}
-	return 0;
-
-}
