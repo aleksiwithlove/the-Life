@@ -63,7 +63,16 @@ void MainWindow::buttonChanged() {
 }
 void MainWindow::UpdateView()
 {
-
+    for (int x =0;x<20;x++) {
+        for(int y=0;y<20;y++) {
+            if (world->getStatusOfCell(x, y)) {
+                setButtonColor(pushButtons[x*20 + y], "green");
+            }
+            else {
+             setButtonColor(pushButtons[x*20 + y], "red");
+            }
+        }
+    }
 }
 
 void MainWindow::do_step()
