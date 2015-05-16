@@ -5,17 +5,15 @@
 
 class World
 {
-private:
-	unsigned int height; //only positive
-	unsigned int width;
-	Cell** AllCells;
-
 public:
-	World(unsigned int haight, unsigned int width);
+    unsigned int height; //only positive
+    unsigned int width;
+    std::vector<std::vector<Cell>> AllCells;
+    World(unsigned int height, unsigned int width);
 	~World();
 	void doStep();
-	//std::vector<Cell*> add_a_heighbors(Cell obj);
-	Cell setStatusofCell(int x, int y, bool alive);
-	bool getStatusofCell(int x, int y);
+    Cell setStatusOfCell(int x, int y, bool alive);
+    bool getStatusOfCell(int x, int y);
 	void reset();
 };
+
