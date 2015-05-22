@@ -8,32 +8,34 @@ Cell::Cell()
 	alive = true;
 }
 
-
-//function of the step to the future, 
-//define what will be the status of cell in the future
-
-
-bool Cell::doStep()
+bool Cell::calculateNew()
 {
-	int sum = 0;
-	for (int i = 0; i < cell_neighbors.size(); i++)
-	{
-		sum += cell_neighbors[i]->alive;
-	}
-
-
-	//if the sum of the neighbors satisfy our criteria 
-	//than the cell become alive
-	if (sum == 3 || sum == 2) alive = true;
-	else alive = false;
-
-
-	//return the status of cell
-	return alive;
+    int sum = 0;
+    for (int i = 0; i < cell_neighbors.size(); i++)
+    {
+        sum += cell_neighbors[i]->alive?1:0;
+    }
+    for (int i = 0; i < cell_neighbors.size(); i++)
+    {
+        if (cell_neighbors[i]->alive == 1)
+        {
+            if ( sum == 3 || sum == 2) newAlive = true;
+            else newAlive = false;
+        }
+        if (cell_neighbors[i]->alive == 0)
+        {
+            if (sum == 3) newAlive = true;
+            else newAlive = false;
+        }
+    }
+    return newAlive;
 }
+ bool Cell::returnNew()
+ {
+     return newAlive;
+ }
 
 
-//recognize the cell's status
 bool Cell::getStatus() {
     return alive;
     }
@@ -42,9 +44,7 @@ void Cell::addNeighbour(Cell* n)
     cell_neighbors.push_back(n);
 }
 
-//give to the cell a certain status
 void Cell::setStatus(bool alive)
 {
 	this->alive = alive;
 }
-
