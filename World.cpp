@@ -53,16 +53,23 @@ World::~World()
     AllCells.clear();
 }
 
-//function of the next generation
 void World::doStep()
 {
 	for (int i = 0; i < height; i++)
 	{
 		for (int j = 0; j < width; j++)
 		{
-			AllCells[i][j].doStep();
+            AllCells[i][j].calculateNew();
 		}
 	}
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            AllCells[i][j].setStatus(AllCells[i][j].returnNew());
+        }
+    }
+
 }
 
 
