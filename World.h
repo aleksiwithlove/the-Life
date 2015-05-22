@@ -11,7 +11,7 @@ public:
     std::vector<std::vector<Cell>> AllCells;
     World(unsigned int height, unsigned int width);
 	~World();
-	void doStep();
+    void doStep();
     Cell setStatusOfCell(int x, int y, bool alive);
     bool getStatusOfCell(int x, int y);
 	void reset();
