@@ -42,19 +42,53 @@ World::World(unsigned int height=20, unsigned int width=20)
 }
 
 
-int World::WorldHeight()
+int World::getHeight()
 {
     return height;
 }
 
-int World::WorldWidth()
+int World::getWidth()
 {
     return width;
 }
 
 World::~World()
 {
+    for (int i =0; i<AllCells.size(); i++)
+    {
+        for (int j = 0; j<AllCells.size();j++)
+        {
+            delete AllCells[i][j];
+        }
+    }
     AllCells.clear();
+
+}
+
+void World::setRandomAlive()
+{
+    for (int i = 0; i < height; i++)
+    {
+        for(int j = 0; j < width; j++)
+        {
+            int z = std::rand()%2;
+            setStatusOfCell(i, j, (bool) z);
+        }
+    }
+}
+
+
+int World::getAliveNumber()
+{
+    int sum = 0;
+       for (int i = 0; i < height; i++)
+       {
+           for(int j = 0; j < width; j++)
+           {
+               sum += getStatusOfCell(i,j)? 1 : 0;
+           }
+       }
+       return sum;
 }
 
 void World::doStep()
