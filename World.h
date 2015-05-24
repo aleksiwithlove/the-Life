@@ -5,13 +5,18 @@
 
 class World
 {
-public:
+private:
     unsigned int height; //only positive
     unsigned int width;
     std::vector<std::vector<Cell*>> AllCells;
+
+public:
+
     World(unsigned int height, unsigned int width);
 	~World();
     void doStep();
+    int WorldHeight();
+    int WorldWidth();
 
     Cell* setStatusOfCell(int x, int y, bool alive);
     bool getStatusOfCell(int x, int y);
