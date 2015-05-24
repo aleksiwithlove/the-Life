@@ -15,11 +15,13 @@ public:
     World(unsigned int height, unsigned int width);
 	~World();
     void doStep();
-    int WorldHeight();
-    int WorldWidth();
+    int getHeight();
+    int getWidth();
 
     Cell* setStatusOfCell(int x, int y, bool alive);
     bool getStatusOfCell(int x, int y);
 	void reset();
+    void setRandomAlive();
+    int getAliveNumber();
 };
 
