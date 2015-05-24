@@ -6,26 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>582</width>
-    <height>441</height>
+    <width>782</width>
+    <height>641</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>582</width>
-    <height>441</height>
+    <width>782</width>
+    <height>641</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>582</width>
-    <height>441</height>
+    <width>782</width>
+    <height>641</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -40,14 +40,14 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>582</width>
-     <height>441</height>
+     <width>782</width>
+     <height>641</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>582</width>
-     <height>441</height>
+     <width>782</width>
+     <height>641</height>
     </size>
    </property>
    <widget class="QWidget" name="layoutWidget">
@@ -55,14 +55,27 @@
      <rect>
       <x>11</x>
       <y>20</y>
-      <width>561</width>
-      <height>411</height>
+      <width>770</width>
+      <height>602</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QWidget" name="widget" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>600</width>
+         <height>600</height>
+        </size>
+       </property>
        <zorder>verticalSpacer_2</zorder>
+       <zorder>horizontalSpacer</zorder>
       </widget>
      </item>
      <item>
@@ -82,7 +95,7 @@
       </spacer>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_6">
+      <layout class="QVBoxLayout" name="verticalLayout_7">
        <property name="spacing">
         <number>0</number>
        </property>
@@ -100,7 +113,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_6">
+        <widget class="QPushButton" name="pushButtonStep">
          <property name="minimumSize">
           <size>
            <width>101</width>
@@ -118,7 +131,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_7">
+        <widget class="QPushButton" name="pushButtonRun">
          <property name="minimumSize">
           <size>
            <width>101</width>
@@ -136,7 +149,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_8">
+        <widget class="QPushButton" name="pushButtonStop">
          <property name="minimumSize">
           <size>
            <width>101</width>
@@ -154,16 +167,61 @@
         </widget>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_7">
-         <property name="spacing">
-          <number>0</number>
+        <widget class="QPushButton" name="pushButtonRand">
+         <property name="minimumSize">
+          <size>
+           <width>101</width>
+           <height>41</height>
+          </size>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>RANDOM</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonClear">
+         <property name="minimumSize">
+          <size>
+           <width>101</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>CLEAR</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QPushButton" name="pushButton_9">
+          <widget class="QLabel" name="labelAlive">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Alive cells:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="labelAliveNumber">
            <property name="minimumSize">
             <size>
-             <width>101</width>
-             <height>41</height>
+             <width>60</width>
+             <height>23</height>
             </size>
            </property>
            <property name="font">
@@ -172,61 +230,9 @@
             </font>
            </property>
            <property name="text">
-            <string>RANDOM</string>
+            <string>0</string>
            </property>
           </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_10">
-           <property name="minimumSize">
-            <size>
-             <width>101</width>
-             <height>41</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>14</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>CLEAR</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QLabel" name="label_3">
-             <property name="font">
-              <font>
-               <pointsize>14</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Alive cells:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_4">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>23</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>14</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>0</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
          </item>
         </layout>
        </item>
