@@ -97,7 +97,7 @@ void World::doStep()
 	{
 		for (int j = 0; j < width; j++)
 		{
-            AllCells[i][j]->calculateNew();
+            AllCells[i][j]->calculateNewStatus();
 		}
 	}
     for (int i = 0; i < height; i++)
