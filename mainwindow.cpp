@@ -3,19 +3,19 @@
 #include <QPushButton>
 #include <iostream>
 #include <QTimer>
-#include <sstream>
+
+#define BUTTON_WIDTH 20
+#define BUTTON_HEIGHT 20
+
 MainWindow::MainWindow( QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-
 }
 
 void MainWindow::setWorld(World* world) {
     timer = new QTimer(this);
-
     this->world = world;
     pushButtons = new QPushButton*[world->getHeight() * world->getWidth()];
     QPushButton* pushButton;
@@ -24,7 +24,7 @@ void MainWindow::setWorld(World* world) {
         for(int j=0;j < world->getWidth();j++)
         {
             pushButton = new QPushButton(ui->widget);
-            pushButton->setGeometry(i*20, j*20, 20, 20);
+            pushButton->setGeometry(i*BUTTON_HEIGHT, j*BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_WIDTH);
             setButtonColor(pushButton, "red");
 
             pushButton->setProperty("cellPositionX", QVariant(i));
@@ -34,23 +34,19 @@ void MainWindow::setWorld(World* world) {
             pushButtons[i * world->getHeight() + j] = pushButton;
         }
     }
-
     QObject::connect(ui->pushButtonStep,SIGNAL(clicked()), this, SLOT(doStepWorld()));
     QObject::connect(ui->pushButtonClear,SIGNAL(clicked()), this, SLOT(btnClear()));
-
     QObject::connect(ui->pushButtonRun,SIGNAL(clicked()), this, SLOT(btnRun()));
     QObject::connect(ui->pushButtonStop,SIGNAL(clicked()), this, SLOT(btnStop()));
     QObject::connect(ui->pushButtonRand,SIGNAL(clicked()), this, SLOT(btnRand()));
-
     setWindowTitle("The World of Empress");
     world->doStep();
     world->doStep();
-
     UpdateView();
 }
 
 void MainWindow::setButtonColor(QPushButton* pb, QString color) {
-    pb->setStyleSheet("QPushButton{background:" + color + ";}"
+    pb->setStyleSheet("QPushButton{background:" + color + ";}" +
                            "QPushButton:hover{background: blue;}");
 }
 
@@ -58,13 +54,14 @@ void MainWindow::buttonChanged() {
     int x, y;
     x = QObject::sender()->property("cellPositionX").toInt();
     y = QObject::sender()->property("cellPositionY").toInt();
-
   world->setStatusOfCell(x, y, !world->getStatusOfCell(x, y));
-    if (world->getStatusOfCell(x, y)) {
-        setButtonColor(pushButtons[x*world->getHeight() + y], "green");
+    if (world->getStatusOfCell(x, y))
+    {
+        setButtonColor(pushButtons[x*world->getHeight() + y], QString::fromStdString(aliveColor));
     }
-    else {
-        setButtonColor(pushButtons[x*world->getHeight() + y], "red");
+    else
+    {
+        setButtonColor(pushButtons[x*world->getHeight() + y], QString::fromStdString(deathColor));
     }
    setLabelAliveNumber();
 }
@@ -89,13 +86,12 @@ void MainWindow::btnStop()
 void MainWindow::btnRand()
 {
    world->setRandomAlive();
-    UpdateView();
+   UpdateView();
 }
 
 void MainWindow::setLabelAliveNumber()
 {
-
-    ui->labelAliveNumber->setText(QString::number(world->getAliveNumber()));
+   ui->labelAliveNumber->setText(QString::number(world->getAliveNumber()));
 }
 
 void MainWindow::UpdateView()
@@ -103,10 +99,10 @@ void MainWindow::UpdateView()
     for (int x =0;x<world->getHeight();x++) {
         for(int y=0;y<world->getWidth();y++) {
             if (world->getStatusOfCell(x, y)) {
-                setButtonColor(pushButtons[x*world->getHeight() + y], "green");
+                setButtonColor(pushButtons[x*world->getHeight() + y], QString::fromStdString(aliveColor));
             }
             else {
-                setButtonColor(pushButtons[x*world->getHeight() + y], "red");
+                setButtonColor(pushButtons[x*world->getHeight() + y], QString::fromStdString(deathColor));
             }
         }
     }
