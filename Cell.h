@@ -3,12 +3,13 @@
 
 class Cell
 {
-public:
-	
-	std::vector<Cell*> cell_neighbors;
+private:
+    std::vector<Cell*> cell_neighbors;
 
-	bool alive;
+    bool alive;
     bool newAlive;
+
+public:
 
 	Cell();
 	bool getStatus();
