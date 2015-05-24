@@ -8,6 +8,7 @@ World::World(unsigned int height=20, unsigned int width=20)
     this->height = height;
 	this->width = width;
     AllCells.resize(height);
+    
 	for (int i = 0; i < height; i++)
 	{
         AllCells[i].resize(width);
@@ -18,6 +19,7 @@ World::World(unsigned int height=20, unsigned int width=20)
             AllCells[i][j] = Ameba;
 		}
 	}
+    
     Cell* n;
     for (int i = 0; i < height; i++)
 	{
@@ -95,6 +97,7 @@ void World::doStep()
             AllCells[i][j] -> calculateNewStatus();
 		}
 	}
+    
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
