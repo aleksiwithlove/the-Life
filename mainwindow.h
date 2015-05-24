@@ -16,9 +16,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    //MainWindow(World* w, QWidget *parent = 0);
     QTimer *timer;
-
     ~MainWindow();
     void setWorld(World* w);
 
@@ -28,17 +26,15 @@ public:
     QPushButton** pushButtons;
     void setButtonColor(QPushButton* pb, QString color);
     void UpdateView();
-signals:
-    void MyS();
+    void setLabelAliveNumber();
 
 public slots:
     void buttonChanged();
-    void do_step();
-    void btn_reset();
-    void btn_run();
-    void btn_stop();
-    void btn_rand();
-    void lbl_num();
+    void doStepWorld();
+    void btnClear();
+    void btnRun();
+    void btnStop();
+    void btnRand();
 };
 
 #endif // MAINWINDOW_H
