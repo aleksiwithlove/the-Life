@@ -42,7 +42,16 @@ World::World(unsigned int height=20, unsigned int width=20)
 }
 
 
-//deconstructor of the world
+int World::WorldHeight()
+{
+    return height;
+}
+
+int World::WorldWidth()
+{
+    return width;
+}
+
 World::~World()
 {
     AllCells.clear();
