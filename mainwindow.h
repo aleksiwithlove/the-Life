@@ -5,7 +5,7 @@
 #include <QPushButton>
 #include <QSignalMapper>
 #include "World.h"
-
+#include <string>
 namespace Ui {
 class MainWindow;
 }
@@ -18,6 +18,8 @@ private:
     QPushButton** pushButtons;
     Ui::MainWindow *ui;
     QTimer *timer;
+    const std::string aliveColor = "green";
+    const std::string deathColor = "red";
 
 public:
     explicit MainWindow(QWidget *parent = 0);
