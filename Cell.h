@@ -14,7 +14,7 @@ public:
 	Cell();
 	bool getStatus();
 	void setStatus(bool alive);
-    bool calculateNew();
+    bool calculateNewStatus();
     bool returnNew();
     void addNeighbour(Cell* n);
 };
