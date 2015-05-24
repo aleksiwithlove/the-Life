@@ -21,12 +21,7 @@ bool Cell::calculateNew()
     {
         newAlive = (sum == 3 || sum == 2);
     }
-    else
-    {
-        if (sum == 3) {
-            newAlive = (sum == 3);
-        }
-    }
+    else {newAlive = (sum == 3);}
 
     return newAlive;
 }
