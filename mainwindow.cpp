@@ -3,9 +3,7 @@
 #include <QPushButton>
 #include <iostream>
 #include <QTimer>
-#include <stdlib.h>     /* srand, rand */
 #include <sstream>
-//#include "World.h"
 MainWindow::MainWindow( QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -19,11 +17,11 @@ void MainWindow::setWorld(World* world) {
     timer = new QTimer(this);
 
     this->world = world;
-    pushButtons = new QPushButton*[20 * 20];
+    pushButtons = new QPushButton*[world->height * world->width];
     QPushButton* pushButton;
-    for (int i =0;i<20;i++)
+    for (int i =0;i<world->height;i++)
     {
-        for(int j=0;j<20;j++)
+        for(int j=0;j < world->width;j++)
         {
             pushButton = new QPushButton(ui->widget);
             pushButton->setGeometry(i*20, j*20, 20, 20);
@@ -34,17 +32,16 @@ void MainWindow::setWorld(World* world) {
 
             QObject::connect(pushButton, SIGNAL(clicked()),
                              this, SLOT(buttonChanged()));
-            pushButtons[i * 20 + j] = pushButton;
+            pushButtons[i * world->height + j] = pushButton;
         }
     }
 
-    QObject::connect(ui->pushButton_6,SIGNAL(clicked()), this, SLOT(do_step()));
-    QObject::connect(ui->pushButton_10,SIGNAL(clicked()), this, SLOT(btn_reset()));
+    QObject::connect(ui->pushButtonStep,SIGNAL(clicked()), this, SLOT(doStepWorld()));
+    QObject::connect(ui->pushButtonClear,SIGNAL(clicked()), this, SLOT(btnClear()));
 
-    QObject::connect(ui->pushButton_7,SIGNAL(clicked()), this, SLOT(btn_run()));
-    QObject::connect(ui->pushButton_8,SIGNAL(clicked()), this, SLOT(btn_stop()));
-    QObject::connect(ui->pushButton_9,SIGNAL(clicked()), this, SLOT(btn_rand()));
-    QObject::connect(ui->label_4,SIGNAL(MyS())), this, SLOT(lbl_num());
+    QObject::connect(ui->pushButtonRun,SIGNAL(clicked()), this, SLOT(btnRun()));
+    QObject::connect(ui->pushButtonStop,SIGNAL(clicked()), this, SLOT(btnStop()));
+    QObject::connect(ui->pushButtonRand,SIGNAL(clicked()), this, SLOT(btnRand()));
 
     setWindowTitle("The World of Empress");
 
@@ -60,85 +57,77 @@ void MainWindow::buttonChanged() {
     int x, y;
     x = QObject::sender()->property("cellPositionX").toInt();
     y = QObject::sender()->property("cellPositionY").toInt();
-    //std::cout << x << " " << y << std::endl;
 
-    world->setStatusOfCell(x, y, !world->getStatusOfCell(x, y));
+  world->setStatusOfCell(x, y, !world->getStatusOfCell(x, y));
     if (world->getStatusOfCell(x, y)) {
-        setButtonColor(pushButtons[x*20 + y], "green");
+        setButtonColor(pushButtons[x*world->height + y], "green");
     }
     else {
-        setButtonColor(pushButtons[x*20 + y], "red");
+        setButtonColor(pushButtons[x*world->height + y], "red");
     }
+   setLabelAliveNumber();
 }
 
-void MainWindow::btn_reset()
+void MainWindow::btnClear()
 {
     world->reset();
     UpdateView();
-}
+ }
 
-void MainWindow::btn_run()
+void MainWindow::btnRun()
 {
-    connect(timer, SIGNAL(timeout()), this, SLOT(do_step()));
-    timer->start(1000);
+    connect(timer, SIGNAL(timeout()), this, SLOT(doStepWorld()));
+    timer->start(500);
 }
 
-void MainWindow::btn_stop()
+void MainWindow::btnStop()
 {
     timer->stop();
 }
 
-void MainWindow::btn_rand()
+void MainWindow::btnRand()
 {
-    for (int i; i < world->height; i++)
+    for (int i = 0; i < world->height; i++)
     {
-        for(int j; j < world->width; j++)
+        for(int j = 0; j < world->width; j++)
         {
             int z = std::rand()%2;
-            std::cout << z;
-            world->setStatusOfCell(i,j,z);
+            world->setStatusOfCell(i, j, (bool) z);
         }
     }
     UpdateView();
 }
 
-void MainWindow::lbl_num()
+void MainWindow::setLabelAliveNumber()
 {
-    std::stringstream s;
-
     int sum = 0;
-    for (int i; i < world->height; i++)
+    for (int i = 0; i < world->height; i++)
     {
-        for(int j; j < world->width; j++)
+        for(int j = 0; j < world->width; j++)
         {
             sum += world->getStatusOfCell(i,j)? 1 : 0;
         }
     }
 
-    s << sum;
-    ui->label_4->setText(s);
-}
-
-void MainWindow::MyS()
-{
-    if (0 == 0) emit MyS();
+    ui->labelAliveNumber->setText(QString::number(sum));
 }
 
 void MainWindow::UpdateView()
 {
-    for (int x =0;x<20;x++) {
-        for(int y=0;y<20;y++) {
+    for (int x =0;x<world->height;x++) {
+        for(int y=0;y<world->width;y++) {
             if (world->getStatusOfCell(x, y)) {
-                setButtonColor(pushButtons[x*20 + y], "green");
+                setButtonColor(pushButtons[x*world->height + y], "green");
             }
             else {
-                setButtonColor(pushButtons[x*20 + y], "red");
+                setButtonColor(pushButtons[x*world->height + y], "red");
             }
         }
     }
+    setLabelAliveNumber();
 }
 
-void MainWindow::do_step()
+void MainWindow::doStepWorld()
 {
     world->doStep();
     UpdateView();
