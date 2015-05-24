@@ -9,15 +9,18 @@ Cell::Cell()
 bool Cell::calculateNewStatus()
 {
     int sum = 0;
+    
     for (int i = 0; i < cell_neighbors.size(); i++)
     {
         sum += cell_neighbors[i]->getStatus() ? 1 : 0;
     }
+    
     if (alive)
     {
         newAlive = (sum == 3 || sum == 2);
     }
     else {newAlive = (sum == 3);}
+    
     return newAlive;
 }
 
