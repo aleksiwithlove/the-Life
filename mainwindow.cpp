@@ -30,8 +30,7 @@ void MainWindow::setWorld(World* world) {
             pushButton->setProperty("cellPositionX", QVariant(i));
             pushButton->setProperty("cellPositionY", QVariant(j));
 
-            QObject::connect(pushButton, SIGNAL(clicked()),
-                             this, SLOT(buttonChanged()));
+            QObject::connect(pushButton, SIGNAL(clicked()), this, SLOT(buttonChanged()));
             pushButtons[i * world->WorldHeight() + j] = pushButton;
         }
     }
@@ -44,6 +43,8 @@ void MainWindow::setWorld(World* world) {
     QObject::connect(ui->pushButtonRand,SIGNAL(clicked()), this, SLOT(btnRand()));
 
     setWindowTitle("The World of Empress");
+    world->doStep();
+    world->doStep();
 
     UpdateView();
 }
