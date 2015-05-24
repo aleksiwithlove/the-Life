@@ -5,7 +5,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    World world(20, 20);
+    World world(30, 30);
 
     MainWindow w;
     w.setWorld(&world);
