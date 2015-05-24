@@ -9,6 +9,7 @@ private:
     unsigned int height; //only positive
     unsigned int width;
     std::vector<std::vector<Cell*>> AllCells;
+
 public:
     World(unsigned int height, unsigned int width);
 	~World();
@@ -21,4 +22,3 @@ public:
     void setRandomAlive();
     int getAliveNumber();
 };
-
