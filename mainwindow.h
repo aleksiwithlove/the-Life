@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QPushButton>
-#include <QSignalMapper>
 #include "World.h"
 #include <string>
 
@@ -14,6 +13,7 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+
 private:
     World* world;
     QPushButton** pushButtons;
@@ -21,6 +21,7 @@ private:
     QTimer *timer;
     const std::string aliveColor = "green";
     const std::string deathColor = "red";
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -28,6 +29,7 @@ public:
     void setButtonColor(QPushButton* pb, QString color);
     void UpdateView();
     void setLabelAliveNumber();
+
 public slots:
     void buttonChanged();
     void doStepWorld();
