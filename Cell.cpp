@@ -27,7 +27,7 @@ bool Cell::returnNew()
 }
 
 
-bool Cell::getStatus() 
+bool Cell::getStatus()
 {
     return alive;
 }
