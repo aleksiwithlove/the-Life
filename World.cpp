@@ -14,7 +14,7 @@ World::World(unsigned int height=20, unsigned int width=20)
 		for (int j = 0; j < width; j++)
 		{
             Cell* Ameba = new Cell();
-            Ameba->setStatus(false);
+            Ameba -> setStatus(false);
             AllCells[i][j] = Ameba;
 		}
 	}
@@ -50,9 +50,9 @@ int World::getWidth()
 
 World::~World()
 {
-    for (int i =0; i<AllCells.size(); i++)
+    for (int i =0; i < AllCells.size(); i++)
     {
-        for (int j = 0; j<AllCells.size();j++)
+        for (int j = 0; j  <AllCells.size();j++)
         {
             delete AllCells[i][j];
         }
@@ -92,14 +92,14 @@ void World::doStep()
 	{
 		for (int j = 0; j < width; j++)
 		{
-            AllCells[i][j]->calculateNewStatus();
+            AllCells[i][j] -> calculateNewStatus();
 		}
 	}
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
         {
-            AllCells[i][j]->setStatus(AllCells[i][j]->returnNew());
+            AllCells[i][j] -> setStatus(AllCells[i][j]->returnNew());
         }
     }
 }
@@ -107,14 +107,14 @@ void World::doStep()
 
 Cell* World::setStatusOfCell(int x, int y, bool alive)
 {
-    AllCells[x][y]->setStatus(alive);
+    AllCells[x][y] -> setStatus(alive);
 	return AllCells[x][y];
 }
 
 
 bool World::getStatusOfCell(int x, int y)
 {
-    return AllCells[x][y]->getStatus();
+    return AllCells[x][y] -> getStatus();
 }
 
 void World::reset()
@@ -123,7 +123,7 @@ void World::reset()
 	{
 		for (int j = 0; j < width; j++)
 		{
-            AllCells[i][j]->setStatus(false);
+            AllCells[i][j] -> setStatus(false);
 		}
 	}
 }
