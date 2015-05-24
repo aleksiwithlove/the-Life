@@ -13,17 +13,17 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
+private:
+    World* world;
+    QPushButton** pushButtons;
 public:
     explicit MainWindow(QWidget *parent = 0);
     QTimer *timer;
     ~MainWindow();
     void setWorld(World* w);
 
-    World* world;
     Ui::MainWindow *ui;
-    QPushButton* doStep;
-    QPushButton** pushButtons;
+
     void setButtonColor(QPushButton* pb, QString color);
     void UpdateView();
     void setLabelAliveNumber();
