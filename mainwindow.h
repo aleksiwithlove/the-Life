@@ -27,7 +27,7 @@ public:
     ~MainWindow();
     void setWorld(World* w);
     void setButtonColor(QPushButton* pb, QString color);
-    void UpdateView();
+    void updateView();
     void setLabelAliveNumber();
 
 public slots:
