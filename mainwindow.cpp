@@ -17,11 +17,11 @@ void MainWindow::setWorld(World* world) {
     timer = new QTimer(this);
 
     this->world = world;
-    pushButtons = new QPushButton*[world->height * world->width];
+    pushButtons = new QPushButton*[world->WorldHeight() * world->WorldWidth()];
     QPushButton* pushButton;
-    for (int i =0;i<world->height;i++)
+    for (int i =0;i<world->WorldHeight();i++)
     {
-        for(int j=0;j < world->width;j++)
+        for(int j=0;j < world->WorldWidth();j++)
         {
             pushButton = new QPushButton(ui->widget);
             pushButton->setGeometry(i*20, j*20, 20, 20);
@@ -32,7 +32,7 @@ void MainWindow::setWorld(World* world) {
 
             QObject::connect(pushButton, SIGNAL(clicked()),
                              this, SLOT(buttonChanged()));
-            pushButtons[i * world->height + j] = pushButton;
+            pushButtons[i * world->WorldHeight() + j] = pushButton;
         }
     }
 
@@ -60,10 +60,10 @@ void MainWindow::buttonChanged() {
 
   world->setStatusOfCell(x, y, !world->getStatusOfCell(x, y));
     if (world->getStatusOfCell(x, y)) {
-        setButtonColor(pushButtons[x*world->height + y], "green");
+        setButtonColor(pushButtons[x*world->WorldHeight() + y], "green");
     }
     else {
-        setButtonColor(pushButtons[x*world->height + y], "red");
+        setButtonColor(pushButtons[x*world->WorldHeight() + y], "red");
     }
    setLabelAliveNumber();
 }
@@ -87,9 +87,9 @@ void MainWindow::btnStop()
 
 void MainWindow::btnRand()
 {
-    for (int i = 0; i < world->height; i++)
+    for (int i = 0; i < world->WorldHeight(); i++)
     {
-        for(int j = 0; j < world->width; j++)
+        for(int j = 0; j < world->WorldWidth(); j++)
         {
             int z = std::rand()%2;
             world->setStatusOfCell(i, j, (bool) z);
@@ -101,9 +101,9 @@ void MainWindow::btnRand()
 void MainWindow::setLabelAliveNumber()
 {
     int sum = 0;
-    for (int i = 0; i < world->height; i++)
+    for (int i = 0; i < world->WorldHeight(); i++)
     {
-        for(int j = 0; j < world->width; j++)
+        for(int j = 0; j < world->WorldWidth(); j++)
         {
             sum += world->getStatusOfCell(i,j)? 1 : 0;
         }
@@ -114,13 +114,13 @@ void MainWindow::setLabelAliveNumber()
 
 void MainWindow::UpdateView()
 {
-    for (int x =0;x<world->height;x++) {
-        for(int y=0;y<world->width;y++) {
+    for (int x =0;x<world->WorldHeight();x++) {
+        for(int y=0;y<world->WorldWidth();y++) {
             if (world->getStatusOfCell(x, y)) {
-                setButtonColor(pushButtons[x*world->height + y], "green");
+                setButtonColor(pushButtons[x*world->WorldHeight() + y], "green");
             }
             else {
-                setButtonColor(pushButtons[x*world->height + y], "red");
+                setButtonColor(pushButtons[x*world->WorldHeight() + y], "red");
             }
         }
     }
