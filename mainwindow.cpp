@@ -16,15 +16,17 @@ MainWindow::MainWindow( QWidget *parent) :
 void MainWindow::setWorld(World* world) {
     timer = new QTimer(this);
     this->world = world;
+
     pushButtons = new QPushButton*[world->getHeight() * world->getWidth()];
     QPushButton* pushButton;
+
     for (int i =0;i<world->getHeight();i++)
     {
         for(int j=0;j < world->getWidth();j++)
         {
             pushButton = new QPushButton(ui->widget);
             pushButton->setGeometry(i*BUTTON_HEIGHT, j*BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_WIDTH);
-            setButtonColor(pushButton, "red");
+            setButtonColor(pushButton, QString::fromStdString(deathColor));
 
             pushButton->setProperty("cellPositionX", QVariant(i));
             pushButton->setProperty("cellPositionY", QVariant(j));
@@ -33,6 +35,7 @@ void MainWindow::setWorld(World* world) {
             pushButtons[i * world->getHeight() + j] = pushButton;
         }
     }
+
     QObject::connect(ui->pushButtonStep, SIGNAL(clicked()), this, SLOT(doStepWorld()));
     QObject::connect(ui->pushButtonClear, SIGNAL(clicked()), this, SLOT(btnClear()));
     QObject::connect(ui->pushButtonRun, SIGNAL(clicked()), this, SLOT(btnRun()));
@@ -41,7 +44,7 @@ void MainWindow::setWorld(World* world) {
     setWindowTitle("The World of Empress");
     world->doStep();
     world->doStep();
-    UpdateView();
+    updateView();
 }
 
 void MainWindow::setButtonColor(QPushButton* pb, QString color) {
@@ -54,6 +57,7 @@ void MainWindow::buttonChanged() {
     x = QObject::sender() -> property("cellPositionX").toInt();
     y = QObject::sender() -> property("cellPositionY").toInt();
     world->setStatusOfCell(x, y, !world->getStatusOfCell(x, y));
+
     if (world->getStatusOfCell(x, y))
     {
         setButtonColor(pushButtons[x*world->getHeight() + y], QString::fromStdString(aliveColor));
@@ -68,7 +72,7 @@ void MainWindow::buttonChanged() {
 void MainWindow::btnClear()
 {
     world->reset();
-    UpdateView();
+    updateView();
  }
 
 void MainWindow::btnRun()
@@ -85,7 +89,7 @@ void MainWindow::btnStop()
 void MainWindow::btnRand()
 {
    world->setRandomAlive();
-   UpdateView();
+   updateView();
 }
 
 void MainWindow::setLabelAliveNumber()
@@ -93,7 +97,7 @@ void MainWindow::setLabelAliveNumber()
    ui -> labelAliveNumber -> setText(QString:: number(world -> getAliveNumber()));
 }
 
-void MainWindow::UpdateView()
+void MainWindow::updateView()
 {
     for (int x = 0; x < world -> getHeight(); x++) {
         for(int y = 0; y < world -> getWidth(); y++) {
@@ -111,7 +115,7 @@ void MainWindow::UpdateView()
 void MainWindow::doStepWorld()
 {
     world->doStep();
-    UpdateView();
+    updateView();
 }
 
 MainWindow::~MainWindow()
