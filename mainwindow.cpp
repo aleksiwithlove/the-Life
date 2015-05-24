@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QPushButton>
-#include <iostream>
 #include <QTimer>
 
 #define BUTTON_WIDTH 20
@@ -34,11 +33,11 @@ void MainWindow::setWorld(World* world) {
             pushButtons[i * world->getHeight() + j] = pushButton;
         }
     }
-    QObject::connect(ui->pushButtonStep,SIGNAL(clicked()), this, SLOT(doStepWorld()));
-    QObject::connect(ui->pushButtonClear,SIGNAL(clicked()), this, SLOT(btnClear()));
-    QObject::connect(ui->pushButtonRun,SIGNAL(clicked()), this, SLOT(btnRun()));
-    QObject::connect(ui->pushButtonStop,SIGNAL(clicked()), this, SLOT(btnStop()));
-    QObject::connect(ui->pushButtonRand,SIGNAL(clicked()), this, SLOT(btnRand()));
+    QObject::connect(ui->pushButtonStep, SIGNAL(clicked()), this, SLOT(doStepWorld()));
+    QObject::connect(ui->pushButtonClear, SIGNAL(clicked()), this, SLOT(btnClear()));
+    QObject::connect(ui->pushButtonRun, SIGNAL(clicked()), this, SLOT(btnRun()));
+    QObject::connect(ui->pushButtonStop, SIGNAL(clicked()), this, SLOT(btnStop()));
+    QObject::connect(ui->pushButtonRand, SIGNAL(clicked()), this, SLOT(btnRand()));
     setWindowTitle("The World of Empress");
     world->doStep();
     world->doStep();
@@ -52,9 +51,9 @@ void MainWindow::setButtonColor(QPushButton* pb, QString color) {
 
 void MainWindow::buttonChanged() {
     int x, y;
-    x = QObject::sender()->property("cellPositionX").toInt();
-    y = QObject::sender()->property("cellPositionY").toInt();
-  world->setStatusOfCell(x, y, !world->getStatusOfCell(x, y));
+    x = QObject::sender() -> property("cellPositionX").toInt();
+    y = QObject::sender() -> property("cellPositionY").toInt();
+    world->setStatusOfCell(x, y, !world->getStatusOfCell(x, y));
     if (world->getStatusOfCell(x, y))
     {
         setButtonColor(pushButtons[x*world->getHeight() + y], QString::fromStdString(aliveColor));
@@ -91,14 +90,14 @@ void MainWindow::btnRand()
 
 void MainWindow::setLabelAliveNumber()
 {
-   ui->labelAliveNumber->setText(QString::number(world->getAliveNumber()));
+   ui -> labelAliveNumber -> setText(QString:: number(world -> getAliveNumber()));
 }
 
 void MainWindow::UpdateView()
 {
-    for (int x =0;x<world->getHeight();x++) {
-        for(int y=0;y<world->getWidth();y++) {
-            if (world->getStatusOfCell(x, y)) {
+    for (int x = 0; x < world -> getHeight(); x++) {
+        for(int y = 0; y < world -> getWidth(); y++) {
+            if (world -> getStatusOfCell(x, y)) {
                 setButtonColor(pushButtons[x*world->getHeight() + y], QString::fromStdString(aliveColor));
             }
             else {
