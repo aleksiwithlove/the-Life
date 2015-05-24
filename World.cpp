@@ -7,9 +7,7 @@ World::World(unsigned int height=20, unsigned int width=20)
 {
     this->height = height;
 	this->width = width;
-
     AllCells.resize(height);
-
 	for (int i = 0; i < height; i++)
 	{
         AllCells[i].resize(width);
@@ -20,7 +18,6 @@ World::World(unsigned int height=20, unsigned int width=20)
             AllCells[i][j] = Ameba;
 		}
 	}
-
     Cell* n;
     for (int i = 0; i < height; i++)
 	{
@@ -40,7 +37,6 @@ World::World(unsigned int height=20, unsigned int width=20)
 		}
 	}
 }
-
 
 int World::getHeight()
 {
@@ -62,7 +58,6 @@ World::~World()
         }
     }
     AllCells.clear();
-
 }
 
 void World::setRandomAlive()
@@ -88,7 +83,7 @@ int World::getAliveNumber()
                sum += getStatusOfCell(i,j)? 1 : 0;
            }
        }
-       return sum;
+    return sum;
 }
 
 void World::doStep()
@@ -107,7 +102,6 @@ void World::doStep()
             AllCells[i][j]->setStatus(AllCells[i][j]->returnNew());
         }
     }
-
 }
 
 
@@ -133,9 +127,3 @@ void World::reset()
 		}
 	}
 }
-
-
-
-
-
-
