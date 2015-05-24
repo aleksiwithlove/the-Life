@@ -16,13 +16,14 @@ class MainWindow : public QMainWindow
 private:
     World* world;
     QPushButton** pushButtons;
+    Ui::MainWindow *ui;
+    QTimer *timer;
+
 public:
     explicit MainWindow(QWidget *parent = 0);
-    QTimer *timer;
     ~MainWindow();
     void setWorld(World* w);
 
-    Ui::MainWindow *ui;
 
     void setButtonColor(QPushButton* pb, QString color);
     void UpdateView();
